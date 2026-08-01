@@ -10,11 +10,11 @@ interface JathakamInputFormProps {
 
 const JathakamInputForm: React.FC<JathakamInputFormProps> = ({ title, defaultGender, onGenerate, colorVar }) => {
   const [formData, setFormData] = useState({
-    name: '',
+    name: defaultGender === 'M' ? 'Vineeth V' : '',
     gender: defaultGender,
-    dob: '',
-    time: '',
-    city: '',
+    dob: defaultGender === 'M' ? '1998-07-19' : '',
+    time: defaultGender === 'M' ? '05:59:00' : '',
+    city: defaultGender === 'M' ? 'Edappal' : '',
     manualNakshatra: ''
   });
 
@@ -106,10 +106,7 @@ const JathakamInputForm: React.FC<JathakamInputFormProps> = ({ title, defaultGen
           <input type="text" name="city" value={formData.city} onChange={handleChange} required className="input-field" placeholder="e.g. Kerala, India" />
         </div>
         
-        <div className="flex flex-col gap-2 mt-2">
-          <label className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>Nakshatra Override (Optional)</label>
-          <input type="text" name="manualNakshatra" value={formData.manualNakshatra} onChange={handleChange} className="input-field" placeholder="Leave blank to auto-calculate" />
-        </div>
+
 
         <button type="submit" disabled={loading} className="btn-outline mt-4" style={{ borderColor: colorVar, color: colorVar }}>
           {loading ? 'Calculating Ephemeris...' : <><Search size={18} /> Generate Astrological Details</>}
